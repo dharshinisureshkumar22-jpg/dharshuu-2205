@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dharshuu Portfolio</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI,sans-serif}
+body{overflow-x:hidden;color:#fff;background:#000}
+
+canvas{position:fixed;top:0;left:0;z-index:-1}
+
+html{scroll-behavior:smooth}
+
+header{position:fixed;width:100%;padding:20px 50px;display:flex;justify-content:space-between;background:rgba(255,255,255,0.05);backdrop-filter:blur(10px);z-index:10}
+header h2{color:#0ff}
+nav a{margin-left:20px;color:white;text-decoration:none}
+nav a:hover{color:#0ff}
+
+section{min-height:100vh;padding:100px 50px}
+
+.glass{background:rgba(255,255,255,0.08);backdrop-filter:blur(15px);border-radius:20px;padding:30px;box-shadow:0 0 20px rgba(0,255,255,0.2)}
+
+.hero{display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
+.hero h1{font-size:60px;color:#0ff}
+.typing{font-size:24px;margin-top:10px}
+
+.btn{margin-top:20px;padding:10px 25px;border:none;background:#0ff;color:#000;border-radius:20px;cursor:pointer}
+.btn:hover{transform:scale(1.1)}
+
+.skills .bar{margin:15px 0}
+.skills .progress{height:10px;background:#222;border-radius:10px}
+.skills .progress div{height:100%;background:#0ff;border-radius:10px}
+
+.projects,.services{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
+.card{transition:0.3s}
+.card:hover{transform:translateY(-10px) scale(1.05)}
+
+footer{text-align:center;padding:20px;background:rgba(255,255,255,0.05)}
+
+@media(max-width:768px){
+.hero h1{font-size:35px}
+header{padding:15px}
+}
+</style>
+</head>
+<body>
+
+<canvas id="bg"></canvas>
+
+<header>
+<h2>Dharshuu</h2>
+<nav>
+<a href="#home">Home</a>
+<a href="#about">About</a>
+<a href="#skills">Skills</a>
+<a href="#projects">Projects</a>
+<a href="#contact">Contact</a>
+</nav>
+</header>
+
+<section id="home" class="hero">
+<div class="glass">
+<h1>Dharshuu</h1>
+<div class="typing" id="typing"></div>
+<button class="btn">Hire Me</button>
+</div>
+</section>
+
+<section id="about">
+<div class="glass">
+<h2>About Me</h2>
+<p>
+I'm Dharshuu, a passionate Frontend Developer and aspiring IT professional. 
+I enjoy building creative, responsive, and user-friendly websites using modern technologies. 
+I love turning ideas into real-world digital experiences.
+</p>
+</div>
+</section>
+
+<section id="skills" class="skills">
+<div class="glass">
+<h2>My Skills</h2>
+<div class="bar">HTML<div class="progress"><div style="width:90%"></div></div></div>
+<div class="bar">CSS<div class="progress"><div style="width:85%"></div></div></div>
+<div class="bar">JavaScript<div class="progress"><div style="width:80%"></div></div></div>
+<div class="bar">React (Basic)<div class="progress"><div style="width:70%"></div></div></div>
+</div>
+</section>
+
+<section id="projects">
+<div class="glass">
+<h2>My Projects</h2>
+</div>
+
+<div class="projects">
+<div class="glass card">
+<h3>Portfolio Website</h3>
+<p>A modern personal portfolio with animations and 3D background.</p>
+</div>
+
+<div class="glass card">
+<h3>Weather App</h3>
+<p>Real-time weather app using API with dynamic UI updates.</p>
+</div>
+
+<div class="glass card">
+<h3>To-Do List App</h3>
+<p>A simple task manager with add, delete, and save features.</p>
+</div>
+
+<div class="glass card">
+<h3>Login Page UI</h3>
+<p>Beautiful glassmorphism login page design with validation.</p>
+</div>
+</div>
+</section>
+
+<section id="services">
+<div class="glass">
+<h2>My Services</h2>
+</div>
+
+<div class="services">
+<div class="glass card">
+<h3>Web Design</h3>
+<p>Creative and modern UI designs for websites.</p>
+</div>
+
+<div class="glass card">
+<h3>Frontend Development</h3>
+<p>Responsive websites using HTML, CSS, JavaScript.</p>
+</div>
+
+<div class="glass card">
+<h3>UI/UX Design</h3>
+<p>Clean and user-friendly interface design.</p>
+</div>
+</div>
+</section>
+
+<section id="resume">
+<div class="glass">
+<h2>Resume</h2>
+<p>You can download my resume soon. Stay tuned!</p>
+</div>
+</section>
+
+<section id="testimonials">
+<div class="glass">
+<h2>Testimonials</h2>
+<p>"Great work and dedication!" - Client</p>
+<p>"Very creative developer!" - Friend</p>
+</div>
+</section>
+
+<section id="contact">
+<div class="glass">
+<h2>Contact Me</h2>
+<p>Email: dharshini@gmail.com</p>
+<p>Location: Tamil Nadu, India</p>
+</div>
+</section>
+
+<footer>
+<p>© 2026 Dharshuu | All Rights Reserved</p>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+
+<script>
+// Typing effect
+const text="Frontend Developer | UI Designer | Creative Coder";
+let i=0;
+function typing(){
+ if(i<text.length){
+  document.getElementById("typing").innerHTML+=text.charAt(i);
+  i++;setTimeout(typing,50);
+ }
+}
+typing();
+
+// 3D Background
+const scene=new THREE.Scene();
+const camera=new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight,0.1,1000);
+const renderer=new THREE.WebGLRenderer({canvas:document.getElementById('bg')});
+renderer.setSize(window.innerWidth,window.innerHeight);
+
+const geometry=new THREE.IcosahedronGeometry(10,1);
+const material=new THREE.MeshBasicMaterial({color:0x00ffff,wireframe:true});
+const shape=new THREE.Mesh(geometry,material);
+scene.add(shape);
+
+camera.position.z=25;
+
+function animate(){
+requestAnimationFrame(animate);
+shape.rotation.x+=0.005;
+shape.rotation.y+=0.01;
+renderer.render(scene,camera);
+}
+animate();
+</script>
+
+</body>
+</html>
